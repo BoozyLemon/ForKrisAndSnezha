@@ -1,0 +1,39 @@
+﻿<Window x:Class="College.Views.DetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:College.Views"
+        mc:Ignorable="d"
+        FontFamily="Times New Roman"
+        Background="#ffe4e1"
+        MaxWidth="550" MaxHeight="450"
+        Title="Детали">
+    <StackPanel >
+        <StackPanel Orientation="Horizontal">
+            <Image Name="ImageStudent" MaxHeight="100"/>
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Name="TextBlockName"/>
+                <TextBlock Name="TextBlockGroupNumber"/>
+            </StackPanel>
+        </StackPanel>
+        <TabControl Name="TabControlSemesters">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <ListView ItemsSource="{Binding Marks}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+    </StackPanel>
+</Window>

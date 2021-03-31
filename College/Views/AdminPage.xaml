@@ -1,0 +1,105 @@
+﻿<Page x:Class="College.Views.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:College.Views"
+      mc:Ignorable="d"
+      FontFamily="Times New Roman"
+      Background="#ffe4e1"
+      Title="Администратор"
+      MinHeight="450" MinWidth="800">
+
+    <Grid>
+        <TabControl>
+            <TabItem Header="Преподаватели">
+                <StackPanel>
+                    <TextBox Name="TextBoxSearchEmployee" HorizontalAlignment="Center" MinWidth="250" TextChanged="TextBoxSearchEmployee_TextChanged"/>
+                    <Separator/>
+                    <StackPanel
+                        Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Margin="5" Name="ButtonAddEmployee" Content="Добавить преподавателя" Click="ButtonAddEmployee_Click"/>
+                        <Button Margin="5" Name="ButtonEditEmployee" Content="Редактировать преподавателя" Click="ButtonEditEmployee_Click"/>
+                        <Button Margin="5" Name="ButtonFireEmployee" Content="Уволить преподавателя" Click="ButtonFireEmployee_Click"/>
+                    </StackPanel>
+                    <Separator/>
+                    <DataGrid
+                        Name="DataGridEmployees"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding MiddleName}"/>
+                            <DataGridTextColumn Header="Категория" Binding="{Binding EmployeeCategory.Name}"/>
+                            <DataGridTextColumn Header="Роль" Binding="{Binding Role.Name}"/>
+                            <DataGridTextColumn Header="Логин" Binding="{Binding Login}"/>
+                            <DataGridTextColumn Header="Пароль" Binding="{Binding Password}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Студенты">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox Name="TextBoxSearchStudent" HorizontalAlignment="Center" MinWidth="250" TextChanged="TextBoxSearchStudent_TextChanged" Grid.Row="0"/>
+                    <StackPanel
+                        Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+                        <Button Margin="5" Name="ButtonAddStudent" Content="Добавить студента" Click="ButtonAddStudent_Click"/>
+                        <Button Margin="5" Name="ButtonEditStudent" Content="Редактировать студента" Click="ButtonEditStudent_Click"/>
+                        <Button Margin="5" Name="ButtonExpellStudent" Content="Отчислить студента" Click="ButtonExpellStudent_Click"/>
+                        <ComboBox Name="ComboBoxSortSex" SelectionChanged="ComboBoxSortSex_SelectionChanged" VerticalContentAlignment="Center">
+                            <ComboBoxItem Content="Все" Tag="-1" IsSelected="True"/>
+                            <ComboBoxItem Content="Мужской" Tag="1"/>
+                            <ComboBoxItem Content="Женский" Tag="2"/>
+                        </ComboBox>
+                    </StackPanel>
+                    <ListView
+                        Name="ListViewStudents" VerticalAlignment="Top" Grid.Row="2" SelectionChanged="ListViewStudents_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Photo}" MaxHeight="100"/>
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding FullName}"/>
+                                        <TextBlock Text="{Binding GroupNumber}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Экзамены">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel
+                        Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0">
+                        <Button Margin="5" Name="ButtonAddExam" Content="Назначить экзамен" Click="ButtonAddExam_Click"/>
+                    </StackPanel>
+                    <ListView
+                        Name="ListViewExams" VerticalAlignment="Top" Grid.Row="1" SelectionChanged="ListViewExams_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                        <TextBlock Text="{Binding SubjectCode}"/>
+                                        <TextBlock Text="{Binding Date}"/>
+                                        <TextBlock Text="{Binding Employee.FullName}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+</Page>
